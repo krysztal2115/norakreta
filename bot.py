@@ -11,14 +11,14 @@ from telegram.ext import (
 
 # ===== CONFIG =====
 
-TOKEN = "PUT_YOUR_NEW_TOKEN_HERE"
+TOKEN = "8415057162:AAGtOWhfxRKGsCYDmGwCin9No91QzVKS-lA"
 ADMIN_ID = 8246209948
 
-IMAGE_URL = "https://i.imgur.com/abcd123.jpg"
+IMAGE_URL = "https://imgur.com/a/ohPuUye"
 
-DM_LINK = "https://t.me/yourcontact"
-OPINIE_LINK = "https://t.me/yourreviews"
-BACKUP_LINK = "https://t.me/yourbackup"
+DM_LINK = "https://t.me/+7uBgT_VvCoY0YmFk"
+OPINIE_LINK = "https://t.me/+7uBgT_VvCoY0YmFk"
+BACKUP_LINK = "https://t.me/+7uBgT_VvCoY0YmFk"
 
 # ===== LOGS =====
 
@@ -266,5 +266,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
