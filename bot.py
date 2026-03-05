@@ -11,8 +11,8 @@ from telegram.ext import (
 
 # ===== CONFIG =====
 
-TOKEN = "PUT_YOUR_TOKEN_HERE"
-ADMIN_ID = 123456789
+TOKEN = "8415057162:AAH_yK72905HzTtJYQ90lpLwLkA5BKHlzHw"
+ADMIN_ID =  8246209948
 
 IMAGE_URL = "https://i.imgur.com/abcd123.jpg"
 
@@ -284,3 +284,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
