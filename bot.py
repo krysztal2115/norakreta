@@ -11,8 +11,8 @@ from telegram.ext import (
 
 # ===== CONFIG =====
 
-TOKEN = "8415057162:AAH_yK72905HzTtJYQ90lpLwLkA5BKHlzHw"
-ADMIN_ID =  8246209948
+TOKEN = "PUT_YOUR_NEW_TOKEN_HERE"
+ADMIN_ID = 8246209948
 
 IMAGE_URL = "https://i.imgur.com/abcd123.jpg"
 
@@ -45,16 +45,13 @@ conn.commit()
 def menu_keyboard():
 
     keyboard = [
-
         [
             InlineKeyboardButton("DM", url=DM_LINK),
             InlineKeyboardButton("Opinie", url=OPINIE_LINK)
         ],
-
         [
             InlineKeyboardButton("Backup", url=BACKUP_LINK)
         ]
-
     ]
 
     return InlineKeyboardMarkup(keyboard)
@@ -82,12 +79,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     await context.bot.send_photo(
-
         chat_id=update.effective_chat.id,
         photo=IMAGE_URL,
         caption=text,
         reply_markup=menu_keyboard()
-
     )
 
 # ===== ADMIN PANEL =====
@@ -101,17 +96,15 @@ async def panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     count = cursor.fetchone()[0]
 
     await update.message.reply_text(
-
         f"ADMIN PANEL\n\n"
         f"Users: {count}\n\n"
         "/broadcast - send message\n"
         "/offer - send photo offer\n"
         "/backup - send backup link\n"
         "/export - export users"
-
     )
 
-# ===== BROADCAST =====
+# ===== BROADCAST MODE =====
 
 async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -122,7 +115,7 @@ async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("Send text to broadcast")
 
-# ===== OFFER =====
+# ===== OFFER MODE =====
 
 async def offer(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -148,14 +141,11 @@ async def backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for user in users:
 
         try:
-
             await context.bot.send_message(
                 chat_id=user[0],
                 text=f"Backup link:\n{BACKUP_LINK}"
             )
-
             sent += 1
-
         except:
             pass
 
@@ -174,7 +164,6 @@ async def export_users(update: Update, context: ContextTypes.DEFAULT_TYPE):
     filename = "users.txt"
 
     with open(filename, "w") as file:
-
         for user in users:
             file.write(str(user[0]) + "\n")
 
@@ -193,7 +182,6 @@ async def handle_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mode = context.user_data.get("mode")
 
     # BROADCAST
-
     if mode == "broadcast":
 
         text = update.message.text
@@ -204,16 +192,12 @@ async def handle_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sent = 0
 
         for user in users:
-
             try:
-
                 await context.bot.send_message(
                     chat_id=user[0],
                     text=text
                 )
-
                 sent += 1
-
             except:
                 pass
 
@@ -222,8 +206,11 @@ async def handle_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Message sent to {sent} users")
 
     # OFFER PHOTO
-
     elif mode == "offer_photo":
+
+        if not update.message.photo:
+            await update.message.reply_text("Send a photo")
+            return
 
         photo = update.message.photo[-1].file_id
 
@@ -233,7 +220,6 @@ async def handle_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Send offer description")
 
     # OFFER TEXT
-
     elif mode == "offer_text":
 
         text = update.message.text
@@ -245,17 +231,13 @@ async def handle_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sent = 0
 
         for user in users:
-
             try:
-
                 await context.bot.send_photo(
                     chat_id=user[0],
                     photo=photo,
                     caption=text
                 )
-
                 sent += 1
-
             except:
                 pass
 
@@ -284,4 +266,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
