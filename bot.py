@@ -2,9 +2,9 @@ import sqlite3
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "TU_WSTAW_TOKEN_BOTA"
-ADMIN_ID = 123456789  # <-- Wstaw swój Telegram ID
-BACKUP_LINK = "https://t.me/twoja_grupa_backupowa"
+TOKEN = "8415057162:AAH_yK72905HzTtJYQ90lpLwLkA5BKHlzHw"
+ADMIN_ID = 8246209948  # <-- Wstaw swoj Telegram ID
+BACKUP_LINK = "https://t.me/+-YHYeOEGg0BiMGQ0"
 
 # ====== BAZA DANYCH ======
 conn = sqlite3.connect("users.db")
@@ -25,12 +25,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     conn.commit()
 
     await update.message.reply_text(
-        "? Zosta³eœ zapisany do systemu backupu.\n"
-        "Jeœli grupa padnie — dostaniesz nowy link."
+        "? ZostaÂ³eÅ“ zapisany do systemu backupu.\n"
+        "JeÅ“li grupa padnie â€” dostaniesz nowy link."
     )
 
 
-# ====== WYSY£ANIE LINKU BACKUPU ======
+# ====== WYSYÂ£ANIE LINKU BACKUPU ======
 async def send_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != ADMIN_ID:
         return
@@ -43,13 +43,13 @@ async def send_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await context.bot.send_message(
                 chat_id=user[0],
-                text=f"?? G³ówna grupa zosta³a usuniêta.\n\nNowy link:\n{BACKUP_LINK}"
+                text=f"?? GÂ³Ã³wna grupa zostaÂ³a usuniÃªta.\n\nNowy link:\n{BACKUP_LINK}"
             )
             sent += 1
         except:
             pass
 
-    await update.message.reply_text(f"Wys³ano backup do {sent} osób.")
+    await update.message.reply_text(f"WysÂ³ano backup do {sent} osÃ³b.")
 
 
 # ====== START APLIKACJI ======
@@ -58,5 +58,6 @@ app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("backup", send_backup))
 
-print("Bot dzia³a...")
+print("Bot dziaÂ³a...")
+
 app.run_polling()
