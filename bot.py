@@ -1,4 +1,4 @@
--*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import sqlite3
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
@@ -62,4 +62,5 @@ app.add_handler(CommandHandler("backup", send_backup))
 print("Bot dzia³a...")
 
 app.run_polling()
+
 
