@@ -26,15 +26,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     conn.commit()
 
     await update.message.reply_text(
-        "? Zosta³eœ zapisany do systemu backupu.\n"
-        "Jeœli grupa padnie — dostaniesz nowy link."
+        " Zostales zapisany do systemu backupu.\n"
+        "Jesli grupa padnie — dostaniesz nowy link."
     )
 
 
-# ====== WYSY£ANIE LINKU BACKUPU ======
+# ====== WYSLANIE LINKU BACKUPU ======
 async def send_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != ADMIN_ID:
-        return
+        retur
 
     cursor.execute("SELECT user_id FROM users")
     users = cursor.fetchall()
@@ -44,13 +44,13 @@ async def send_backup(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await context.bot.send_message(
                 chat_id=user[0],
-                text=f"?? G³ówna grupa zosta³a usuniêta.\n\nNowy link:\n{BACKUP_LINK}"
+                text=f"?? GLowna grupa zostala usunieta.\n\nNowy link:\n{BACKUP_LINK}"
             )
             sent += 1
         except:
             pass
 
-    await update.message.reply_text(f"Wys³ano backup do {sent} osób.")
+    await update.message.reply_text(f"Wyslano backup do {sent} osob.")
 
 
 # ====== START APLIKACJI ======
@@ -59,8 +59,9 @@ app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("backup", send_backup))
 
-print("Bot dzia³a...")
+print("Bot dziala...")
 
 app.run_polling()
+
 
 
